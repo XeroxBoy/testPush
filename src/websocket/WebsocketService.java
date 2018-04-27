@@ -1,0 +1,63 @@
+package websocket;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
+import javax.mail.MessagingException;
+import javax.mail.internet.AddressException;
+
+import org.java_websocket.WebSocket;
+
+import pojo.user;
+
+
+public class WebsocketService {
+	private static final Map<WebSocket, String> userconnections = new HashMap<WebSocket, String>();
+
+	
+	//向连接池中添加连接 
+	public static void addUser(String user, WebSocket conn)
+	{ 
+		userconnections.put(conn, user); // 添加连接
+	}
+
+	// 移除连接池中的连接 
+	public static boolean removeUser(WebSocket conn) 
+	{
+		if (userconnections.containsKey(conn))
+	{ 
+			userconnections.remove(conn); // 移除连接 
+			return true;
+			} 
+		else 
+		{ 
+			return false; 
+			}
+		} 
+	
+	// 向所有的用户发送消息
+	public static void sendMessage(String message) 
+{ 
+		Set<WebSocket> keySet = userconnections.keySet(); //获取目前用户的socket
+	synchronized (keySet) 
+ { 
+		for (WebSocket conn : keySet) 
+	{ 
+			String user = userconnections.get(conn); 
+	if (user != null) 
+	 { 
+		conn.send(message); 
+	 } 
+	}
+ } 
+}
+
+
+	}
+
+
+
