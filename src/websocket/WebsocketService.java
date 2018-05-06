@@ -1,18 +1,14 @@
 package websocket;
 
-import java.util.ArrayList;
-import java.util.Collection;
+import org.java_websocket.WebSocket;
+
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import javax.mail.MessagingException;
-import javax.mail.internet.AddressException;
-
-import org.java_websocket.WebSocket;
-
-import pojo.user;
+//
+//import javax.mail.MessagingException;
+//import javax.mail.internet.AddressException;
 
 
 public class WebsocketService {
